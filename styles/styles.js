@@ -11,11 +11,6 @@ export const styles = StyleSheet.create({
         marginTop: 60,
         
     },
-    label: {
-        fontSize: 18,
-        marginBottom: 30,
-        textAlign: 'center'
-    },
     textInput: {
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
@@ -40,9 +35,21 @@ export const styles = StyleSheet.create({
 
     },
     label: {
-        fontSize: 18,
+        fontSize: 40,
         marginBottom: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: -10,
+    },
+    label2: {
+        borderColor: 'black',
+        borderWidth: 2,
+        height: 500,
+        padding: 10,
+        marginBottom: 10,
+        backgroundColor: '#ccc',
+        alignItems: 'center',
+        fontSize: 30,
+        opacity: 0.7,
     },
     image: {
         width: 311,
@@ -54,27 +61,13 @@ export const styles = StyleSheet.create({
         backgroundColor: '#ccc',
         borderColor: 'black',
         borderWidth: 1.5,
-        textAlign: 'center',
+        textAlign: 'center'
     },
-    Parentdiv: {
-        height: height,
-        width: '100%',
-        backgroundColor: 'whitesmoke',
-        borderRadius: 40,
-        margin: 50
-    },
-      Childdiv: {
-        height: '100%',
-        width: `${progress}%`,
-        backgroundColor: bgcolor,
-       borderRadius:40,
-        textAlign: 'right'
-      },
-      
-      progresstext: {
-        padding: 10,
-        color: 'black',
-        fontWeight: 900
-      }
+    tts: {
+        marginTop: -10,
+        alignSelf:'center',
+        width: '75%'
+    }
+    
 
 });

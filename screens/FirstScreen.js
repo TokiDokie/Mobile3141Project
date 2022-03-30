@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {View, Text, Platform, FlatList, Alert, TouchableOpacity } from 'react-native';
+import {View, Text, Platform, FlatList, Alert, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import * as MailComposer from 'expo-mail-composer'
 import * as ImagePicker from 'expo-image-picker';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -8,10 +8,11 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import ContactInput from '../components/ContactInput';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 
-import * as Battery from 'expo-battery';
 
 import { styles } from '../styles/styles';
-import { State } from 'react-native-gesture-handler';
+
+
+
 // Email stuff
 
 const cancelDialog = {
@@ -29,122 +30,119 @@ const promptForEmailResponse = (input) => {
   )
 }
 
+
 const ContactListItem = props => {
 
 
-const showAlert  = async (data) =>
- await Alert.alert(
-    "Add a file",
-    "Do you want to attach a file?", [
-       {
-        text: "No",
-        onPress: () => {sendMessageWithEmail(data)}
-      },
-      {
-        text: "Yes",
-        onPress: () => {sendEmailWithAttachment(data)}
-      },
-      {
-        text: "Take Photo",
-        onPress: () => {sendEmailWithCameraAttachment(data)}
-      },
-    ],
-    {cancelable: true} // Allows to be tapped off of
-  );//END showAlert
+  const showAlert  = async (data) =>
+  await Alert.alert(
+      "Add a file",
+      "Do you want to attach a file?", [
+        {
+          text: "No",
+          onPress: () => {sendMessageWithEmail(data)}
+        },
+        {
+          text: "Yes",
+          onPress: () => {sendEmailWithAttachment(data)}
+        },
+        {
+          text: "Take Photo",
+          onPress: () => {sendEmailWithCameraAttachment(data)}
+        },
+      ],
+      {cancelable: true} // Allows to be tapped off of
+    );//END showAlert
 
-// Wont lock up, will have to wait for some stuff
+  // Wont lock up, will have to wait for some stuff
 
-  const sendEmailWithAttachment = async(data) => {
-    //get the image to attach.
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
+    const sendEmailWithAttachment = async(data) => {
+      //get the image to attach.
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      let arr = data.split('-');
+
+      const isAvailable = await MailComposer.isAvailableAsync();
+      if(isAvailable) {
+        var options = {
+          recipients: [arr[1]],
+          subject: 'Mobile Project',
+          body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
+          attachments:  [result.uri]
+        };
+    
+        MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
+        
+      } else {
+        console.log("Email is not available on this device");
+      }
+    }//END sendEmailWithAttachment
+
+    const sendEmailWithCameraAttachment = async(data) => {
+      //get the image to attach.
+      let result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [16, 9],
+        quality: 1.0
     });
 
-    let arr = data.split('-');
+      let arr = data.split('-');
 
-    const isAvailable = await MailComposer.isAvailableAsync();
-    if(isAvailable) {
-      var options = {
-        recipients: [arr[1]],
-        subject: 'Mobile Project',
-        body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
-        attachments:  [result.uri]
-      };
-  
-      MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
-      
-    } else {
-      console.log("Email is not available on this device");
-    }
-  }//END sendEmailWithAttachment
-
-  const sendEmailWithCameraAttachment = async(data) => {
-    //get the image to attach.
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [16, 9],
-      quality: 1.0
-  });
-
-    let arr = data.split('-');
-
-    const isAvailable = await MailComposer.isAvailableAsync();
-    if(isAvailable) {
-      var options = {
-        recipients: [arr[1]],
-        subject: 'Mobile Project',
-        body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
-        attachments:  [result.uri]
-      };
-  
-      MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
-      
-    } else {
-      console.log("Email is not available on this device");
-    }
-  }//END sendEmailWithAttachment
-
-const sendMessageWithEmail = async (data) => {
-
-  let arr = data.split('-');
-
-  const isAvailable = await MailComposer.isAvailableAsync();
-  if(isAvailable) {
-    var options = {
-      recipients: [arr[1]],
-      subject: 'MAIL COMPOSER',
-      body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
-    };
-
-    MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
+      const isAvailable = await MailComposer.isAvailableAsync();
+      if(isAvailable) {
+        var options = {
+          recipients: [arr[1]],
+          subject: 'Mobile Project',
+          body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
+          attachments:  [result.uri]
+        };
     
-  } else {
-    console.log("Email is not available on this device");
-  }
-}//END sendMessageWithEmail
+        MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
+        
+      } else {
+        console.log("Email is not available on this device");
+      }
+    }//END sendEmailWithAttachment
 
-  return(
-    <View>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => showAlert(props.item)}>
-          <View style={styles.listItem}>
+  const sendMessageWithEmail = async (data) => {
 
-              <Text> {props.item} </Text>
+    let arr = data.split('-');
 
-          </View>
+    const isAvailable = await MailComposer.isAvailableAsync();
+    if(isAvailable) {
+      var options = {
+        recipients: [arr[1]],
+        subject: 'MAIL COMPOSER',
+        body: 'Dear ' + arr[0] + 'I hope this receives a 100% grade',
+      };
 
-      </TouchableOpacity>
+      MailComposer.composeAsync(options).then((result) => { promptForEmailResponse(result.status); })
+      
+    } else {
+      console.log("Email is not available on this device");
+    }
+  }//END sendMessageWithEmail
 
-    </View>
+    return(
+      <View>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => showAlert(props.item)}>
+            <View style={styles.listItem}>
 
-  )
+                <Text> {props.item} </Text>
+
+            </View>
+
+        </TouchableOpacity>
+
+      </View>
+
+    )
 }
-
-
-
-
 
 
 const FirstScreen = (props) => {
@@ -176,62 +174,30 @@ const FirstScreen = (props) => {
   }
 
 // Navigation + 
-  React.useLayoutEffect(() => {
-    props.navigation.setOptions({
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item 
-                title="Add new Contact" 
-                iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'} 
-                onPress={() => setIsAddMode(true)}
-            />
-        </HeaderButtons>
-      ),
-    });
-  }, []);
-
-
-// BATTERY
-//<ProcessBar bgcolor="orange" progress='40'  height={30} />
-
-
-
-
-// Progress
-
-const Progressbar = ({bgcolor,progress,height}) => {
-     
-    
-        
-  return (
-    <View>
-      <div style={styles.Parentdiv}>
-        <div style={styles.Childdiv}>
-          
-          <span style={styles.progresstext}>{`${progress}%`} </span>
-          
-        </div>
-      </div>
-      </View>
-  )
-}
-
-
-
-
-
-
-
+React.useLayoutEffect(() => {
+  props.navigation.setOptions({
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item 
+              title="Add new Contact" 
+              iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'} 
+              onPress={() => setIsAddMode(true)}
+          />
+      </HeaderButtons>
+    ),
+  });
+}, []);
 
 
     return (
         <View style={styles.screen}>
 
-        <Progressbar bgcolor="orange" progress='30'  height={30} />
-
-        
+        <View style={styles.tts}>
+          <Button title="Text-to-Speech" color="blue" onPress={ () => props.navigation.navigate('SecondScreen') } />
+        </View>
 
           <View style={styles.form}>
+          
           <Text style={styles.label}>Ye'old Snapchat</Text>
           
 
@@ -264,3 +230,6 @@ const Progressbar = ({bgcolor,progress,height}) => {
 }
 
 export default FirstScreen;
+
+
+

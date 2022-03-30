@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import FirstScreen from '../screens/FirstScreen';
+import SecondScreen from '../screens/SecondScreen';
 
 
 const Stack = createStackNavigator();
@@ -27,6 +28,14 @@ function AppNavigator() {
                     component={FirstScreen}
                     options={{
                         title: 'Home',
+                    }}
+                />
+
+                <Stack.Screen
+                    name="SecondScreen"
+                    component={SecondScreen}
+                    options={{
+                        title: 'Text-to-Speech',
                     }}
                 />
                 

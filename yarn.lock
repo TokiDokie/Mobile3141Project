@@ -2774,11 +2774,6 @@ expo-asset@~8.3.3:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-battery@~5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/expo-battery/-/expo-battery-5.0.0.tgz#8e158c896c0c0d98822ad042971b245926952e62"
-  integrity sha512-uQ2yKooN9Y271LMG18LVHM8BIHF+VCJ/zOYHy7TTLFGPFXQFWxOnyqIr8NA7Sg2dl3wxDSQqaDSChC/7hE7tyg==
-
 expo-constants@~11.0.1:
   version "11.0.1"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-11.0.1.tgz"
@@ -2859,6 +2854,11 @@ expo-sms@~9.2.3:
   version "9.2.3"
   resolved "https://registry.npmjs.org/expo-sms/-/expo-sms-9.2.3.tgz"
   integrity sha512-zxCbDHy6jBVyfntF0MQwIEAL13pPbvoMTjvh9qsEvwhZ3wGgLWwhdic2xKeM5vyfst2yN1RVcGYpvlRz4P5dPQ==
+
+expo-speech@~9.2.0:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/expo-speech/-/expo-speech-9.2.1.tgz#cc13e6c8d0463d7899c220f2bab858939969da5d"
+  integrity sha512-H5BCSUpHgStK6GnbHGsErsnUWWhpy4ejxkwK+RP8ERBbsFaT5mUowEWLY+/OiRueTwj35qXzYgeqW/tBv90A3g==
 
 expo@^42.0.0:
   version "42.0.3"
