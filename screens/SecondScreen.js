@@ -4,15 +4,6 @@ import * as Speech from 'expo-speech';
 
 import { styles } from '../styles/styles';
 
-
-
-
-
-
-
-
-
-
 const SecondScreen = () => {
 
     const[ThingtoSay, setThingtoSay] = useState('');
@@ -52,7 +43,7 @@ const SecondScreen = () => {
 
 
 
-
+// How to do promises
 
     // return new Promise((resolve, reject) => {
     //     got(srcAddr, { responseType: "json" })
@@ -65,13 +56,6 @@ const SecondScreen = () => {
     //         reject(err);
     //       });
     //   });
-
-
-
-
-
-
-
 
     return (
         <View style={styles.screen}>

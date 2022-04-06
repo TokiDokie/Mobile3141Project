@@ -11,9 +11,22 @@ import CustomHeaderButton from '../components/CustomHeaderButton';
 
 import { styles } from '../styles/styles';
 
+  //Camera & ImagePicker
+// expo install expo-image-picker
+// expo install expo-permissions
+// expo install expo-camera
 
+  // Email
+// expo install expo-mail-composer
 
-// Email stuff
+  // TTS
+// expo install expo-speech
+
+  // Nav
+// npm install --save react-navigation
+// expo install react-native-gesture-handler react-native-reanimated
+// npm install --save react-navigation-header-buttons
+
 
 const cancelDialog = {
   text: 'Close',

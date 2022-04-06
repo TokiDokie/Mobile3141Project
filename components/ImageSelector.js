@@ -3,10 +3,6 @@ import { View, Button, StyleSheet, Alert, CameraRoll } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
-// The following are required for access to the camera:
-// expo install expo-image-picker
-// expo install expo-permissions
-
 const ImageSelector = props => {
     const verifyPermissions = async () => {
         const cameraResult = await ImagePicker.requestCameraPermissionsAsync();
