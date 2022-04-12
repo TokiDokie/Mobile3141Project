@@ -1,4 +1,10 @@
 import AppNavigator from './navigation/AppNavigator';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
+
+
+
 
 //Camera & ImagePicker
 // expo install expo-image-picker
@@ -18,6 +24,7 @@ import AppNavigator from './navigation/AppNavigator';
 
 // Firebase
 // expo install firebase
+
 import React, { useState } from 'react';
 
 export default function App(){
