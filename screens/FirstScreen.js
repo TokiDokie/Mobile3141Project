@@ -19,26 +19,6 @@ import CustomHeaderButton from '../components/CustomHeaderButton';
 import { styles } from '../styles/styles';
 import { createWorklet } from 'react-native-reanimated';
 
-//Camera & ImagePicker
-// expo install expo-image-picker
-// expo install expo-permissions
-// expo install expo-camera
-
-// Email
-// expo install expo-mail-composer
-
-// TTS
-// expo install expo-speech
-
-// Nav
-// npm install --save react-navigation
-// expo install react-native-gesture-handler react-native-reanimated
-// npm install --save react-navigation-header-buttons
-
-// Firebase
-// expo install firebase
-
-
 const cancelDialog = {
   text: 'Close',
   style: 'cancel'
@@ -225,6 +205,11 @@ const FirstScreen = (props) => {
     db.collection("users").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${JSON.stringify(doc.data().first + ' ' + doc.data().last + ' - ' + doc.data().email)}`);
+
+
+        addContactItemHandler(JSON.stringify(doc.data().first + ' ' + doc.data().last + ' - ' + doc.data().email));
+
+
       });
     });
   }, []);
