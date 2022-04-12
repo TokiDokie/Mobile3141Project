@@ -5,11 +5,14 @@ import * as MailComposer from 'expo-mail-composer'
 import * as ImagePicker from 'expo-image-picker';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
+import Clipboard from '@react-native-community/clipboard';
+
 import ContactInput from '../components/ContactInput';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 
 
 import { styles } from '../styles/styles';
+import { createWorklet } from 'react-native-reanimated';
 
   //Camera & ImagePicker
 // expo install expo-image-picker
@@ -141,9 +144,21 @@ const ContactListItem = props => {
     }
   }//END sendMessageWithEmail
 
+    const copyToClipboard = (data) => {
+      //console.log(data);
+      var datata = data;
+      if(datata != null)
+      {
+
+        Clipboard.setString(datata);
+
+      }
+
+    }
+
     return(
       <View>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => showAlert(props.item)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => showAlert(props.item)} onLongPress={() => copyToClipboard(props.item)}>
             <View style={styles.listItem}>
 
                 <Text> {props.item} </Text>
@@ -203,44 +218,39 @@ React.useLayoutEffect(() => {
 
 
     return (
-        <View style={styles.screen}>
+      <View style={styles.screen}>
+      <View style={styles.tts}>
+        <Button
+          title="Text-to-Speech"
+          color="#92A9BD"
+          onPress={() => props.navigation.navigate("SecondScreen")}
+        />
+      </View>
 
-        <View style={styles.tts}>
-          <Button title="Text-to-Speech" color="blue" onPress={ () => props.navigation.navigate('SecondScreen') } />
-        </View>
+      <View style={styles.form}>
+        <Text style={styles.label}>Contacts</Text>
 
-          <View style={styles.form}>
-          
-          <Text style={styles.label}>Ye'old Snapchat</Text>
-          
+        <FlatList
+          style={styles.flatlist}
+          data={contactList}
+          renderItem={(itemData) => (
+            <ContactListItem
+              id={itemData.item.key} // To access ItemData you need to acess the item which is the contactList
+              onDelete={removecontactItemHandler}
+              item={itemData.item.value}
+            />
+          )}
+        />
 
-
-            
-          <FlatList style={styles.flatlist}
-                  data = {contactList}
-                  renderItem={
-                    itemData => (
-                      <ContactListItem 
-                      id={itemData.item.key}    // To access ItemData you need to acess the item which is the contactList  
-                      onDelete={ removecontactItemHandler}
-                      item={itemData.item.value}
-                      
-                      
-                      />
-                    )
-                    
-                  }
-                />
-
-
-          <ContactInput  visible={isAddMode} onCancel={() => setIsAddMode(false)} onAddItem={addContactItemHandler} />
-
-          </View>
-        </View> // MAIN VIEW
-
-        
-    );
-}
+        <ContactInput
+          visible={isAddMode}
+          onCancel={() => setIsAddMode(false)}
+          onAddItem={addContactItemHandler}
+        />
+      </View>
+    </View> // MAIN VIEW
+  );
+};
 
 export default FirstScreen;
 

@@ -18,7 +18,7 @@ function AppNavigator() {
                 screenOptions={{
                     headerTintColor: Platform.OS === 'android' ? 'white' : 'blue',
                     headerStyle: {
-                        backgroundColor: Platform.OS === 'android' ? 'green' : ''
+                        backgroundColor: Platform.OS === 'android' ? "#7C99AC" : ''
                     }
                 }}
                 
