@@ -19,7 +19,7 @@
     "expo-mail-composer": "~10.2.2",
     "expo-permissions": "~12.1.1",
     "expo-speech": "~9.2.0",
-    "firebase": "8.2.3",
+    "firebase": "^8.10.1",
     "react": "16.13.1",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "16.13.1",

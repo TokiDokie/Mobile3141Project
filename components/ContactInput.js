@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Button, Modal, Text } from "react-native"; //TouchablOpacity allows you to tap on a thing
+import { db } from "../firebase";
 
 const ContactInput = (props) => {
   const [enteredContactItemFirstName, setContactFirstName] = useState("");
@@ -27,6 +28,21 @@ const ContactInput = (props) => {
       enteredContactItemEmail;
 
     props.onAddItem(info);
+
+    // Store contact in db
+    db.collection("users").add({
+      first: enteredContactItemFirstName,
+      last: enteredContactItemLastName,
+      email: enteredContactItemEmail
+    })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+
+    // Clear contact fields
     setContactFirstName("");
     setContactLastName("");
     setContactNumEmail("");
@@ -55,7 +71,7 @@ const ContactInput = (props) => {
           value={enteredContactItemLastName}
         />
         <TextInput
-          placeholder="Phone Number/Email"
+          placeholder="Email"
           style={styles.input}
           onChangeText={ContactInputNumEmailHandler}
           value={enteredContactItemEmail}
