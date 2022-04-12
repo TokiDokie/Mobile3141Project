@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import FirstScreen from '../screens/FirstScreen';
 import SecondScreen from '../screens/SecondScreen';
+import LoginScreen from "../screens/LoginScreen";
+
 
 
 const Stack = createStackNavigator();
@@ -22,7 +24,13 @@ function AppNavigator() {
                     }
                 }}
                 
-            >
+            >        
+                <Stack.Screen
+                    name="LoginScreen"
+                    //Remember to change this back to FirstScreen
+                    component={LoginScreen}
+                />
+
                 <Stack.Screen
                     name="FirstScreen"
                     component={FirstScreen}

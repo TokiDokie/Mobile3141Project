@@ -5,7 +5,10 @@ import * as MailComposer from 'expo-mail-composer'
 import * as ImagePicker from 'expo-image-picker';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import Clipboard from '@react-native-community/clipboard';
+
+import * as Clipboard from 'expo-clipboard'
+
+
 
 import ContactInput from '../components/ContactInput';
 import CustomHeaderButton from '../components/CustomHeaderButton';
@@ -29,6 +32,9 @@ import { createWorklet } from 'react-native-reanimated';
 // npm install --save react-navigation
 // expo install react-native-gesture-handler react-native-reanimated
 // npm install --save react-navigation-header-buttons
+
+  // Firebase
+// expo install firebase
 
 
 const cancelDialog = {
@@ -146,11 +152,10 @@ const ContactListItem = props => {
 
     const copyToClipboard = (data) => {
       //console.log(data);
-      var datata = data;
-      if(datata != null)
+      if(data != null)
       {
 
-        Clipboard.setString(datata);
+        Clipboard.setString(data);
 
       }
 
