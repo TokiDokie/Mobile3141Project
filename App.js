@@ -3,6 +3,17 @@ import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs(['Setting a timer']);
 
+/*
+ *
+  -Toki (Darrell Bryan)  - d_bryan8@fanshaweonline.ca 
+
+  -Julian Vines - j_vines@fanshaweonline.ca
+
+  -Leah Tomaszewski - l_tomaszewski@fanshaweonline.ca
+
+  -Dylan Gendreau - d_gendreau@fanshaweonline.ca 
+ *
+*/
 
 
 

@@ -56,7 +56,7 @@ const LoginScreen = (props) => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Email - jules@test.com"
+          placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.input}

@@ -206,8 +206,10 @@ const FirstScreen = (props) => {
       querySnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${JSON.stringify(doc.data().first + ' ' + doc.data().last + ' - ' + doc.data().email)}`);
 
+        let userData = doc.data().first + ' ' + doc.data().last + ' - ' + doc.data().email;
 
-        addContactItemHandler(JSON.stringify(doc.data().first + ' ' + doc.data().last + ' - ' + doc.data().email));
+
+        addContactItemHandler(userData);
 
 
       });
@@ -217,6 +219,7 @@ const FirstScreen = (props) => {
 
   return (
     <View style={styles.screen}>
+      <Text style={{alignSelf: 'center' , fontSize: 25}}>Ye Old Snapchat</Text>
       <View style={styles.tts}>
         <Button
           title="Text-to-Speech"
@@ -226,7 +229,8 @@ const FirstScreen = (props) => {
       </View>
 
       <View style={styles.form}>
-        <Text style={styles.label}>Contacts</Text>
+        
+        <Text style={styles.label}>Contact List</Text>
 
         <FlatList
           style={styles.flatlist}

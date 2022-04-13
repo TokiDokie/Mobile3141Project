@@ -49,12 +49,14 @@ export const styles = StyleSheet.create({
     padding: "50%",
     color: "#E9DAC1",
   },
-  flatlist: {},
+  flatlist: {
+    marginBottom: 50,
+  },
   label: {
     fontSize: 40,
-    marginBottom: 30,
+    marginBottom: 20,
     textAlign: "center",
-    marginTop: -10,
+    marginTop: -25,
   },
   label2: {
     borderColor: "black",
